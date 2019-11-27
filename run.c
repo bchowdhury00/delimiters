@@ -4,16 +4,15 @@
 #include <stdlib.h>
 
 char ** parse_args(char * line){
-  char * source = &line;
   char delim[] = " ";
-  char * args= malloc(0);
+  char ** args = malloc(6 * sizeof(char*));
   int counter = 0;
-  while (*source != NULL){
-    args = realloc(args,counter * sizeof(char *));
-    args[counter] = strsep(source,delim);
+  while (line != NULL){
+    args[counter] = strsep(&line,delim);
     counter++;
   }
-  return &args;
+  args[counter] = NULL;
+  return args;
 }
 
 int main(int argc, char * argv[]){
